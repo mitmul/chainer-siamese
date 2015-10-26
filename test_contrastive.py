@@ -68,9 +68,11 @@ class TestHinge(unittest.TestCase):
 
         func = loss.creator
         f = lambda: func.forward((x0.data, x1.data, t.data))
-        gx, = gradient_check.numerical_grad(f, (x0.data,), (1,))
+        gx0, = gradient_check.numerical_grad(f, (x0.data,), (1,))
+        gx1, = gradient_check.numerical_grad(f, (x1.data,), (1,))
 
-        gradient_check.assert_allclose(gx, x0.grad)
+        gradient_check.assert_allclose(gx0, x0.grad)
+        gradient_check.assert_allclose(gx1, x1.grad)
 
     @condition.retry(3)
     def test_backward_cpu(self):
