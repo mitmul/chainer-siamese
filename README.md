@@ -14,5 +14,9 @@ $ python train_test.py --gpu 0
 # Test
 
 ```
-$ python train_test.py --train 0 --gpu 0 --epoch 100
+$ python train_test.py --train 0 --gpu 0
 ```
+
+## Result
+
+![](https://raw.githubusercontent.com/wiki/mitmul/chainer-siamese/images/result.png)

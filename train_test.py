@@ -114,7 +114,7 @@ if __name__ == '__main__':
     # prep for args
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', default=-1, type=int)
-    parser.add_argument('--epoch', default=100, type=int)
+    parser.add_argument('--epoch', default=50, type=int)
     parser.add_argument('--batchsize', default=128, type=int)
     parser.add_argument('--lr', default=0.01, type=float)
     parser.add_argument('--gamma', default=0.001, type=float)
