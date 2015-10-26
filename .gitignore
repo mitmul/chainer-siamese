@@ -1,0 +1,9 @@
+.DS_Store
+.remote-sync.json
+
+result
+
+*.pyc
+*.png
+*.jpg
+*.pkl
