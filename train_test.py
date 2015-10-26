@@ -33,6 +33,7 @@ def get_model_optimizer(args):
     # model preparation
     model = SiameseNetwork()
     if args.gpu >= 0:
+        cuda.get_device(args.gpu).use()
         model.to_gpu()
 
     # optimizer
@@ -92,7 +93,6 @@ def test(args, model, test_data, test_label):
     xp = cuda.cupy if args.gpu >= 0 else np
     N = test_data.shape[0]
     results = xp.empty((test_data.shape[0], 2))
-    test_data /= 255.0
     for i in range(0, N, args.batchsize):
         x_batch = test_data[i:i + args.batchsize]
         x_batch = xp.asarray(x_batch, dtype=xp.float32)
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     # prep for args
     parser = argparse.ArgumentParser()
     parser.add_argument('--gpu', default=-1, type=int)
-    parser.add_argument('--epoch', default=1000, type=int)
+    parser.add_argument('--epoch', default=100, type=int)
     parser.add_argument('--batchsize', default=128, type=int)
     parser.add_argument('--lr', default=0.01, type=float)
     parser.add_argument('--gamma', default=0.001, type=float)

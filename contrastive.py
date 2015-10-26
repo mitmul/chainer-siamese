@@ -62,4 +62,7 @@ class Contrastive(function.Function):
 
 
 def contrastive(x0, x1, y, margin=1, use_cudnn=True):
+    """Contrastive loss.
+
+    """
     return Contrastive(margin, use_cudnn)(x0, x1, y)
