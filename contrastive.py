@@ -47,15 +47,15 @@ class Contrastive(function.Function):
         x0, x1, y = inputs
 
         y = xp.vstack((y, y)).T
-        alpha = gy[0] / 2.0 / y.shape[0]
+        alpha = gy[0] / y.shape[0]
         dist = xp.vstack((self.dist, self.dist)).T
         # similar pair
-        gx0 = alpha * y * 2 * self.diff
+        gx0 = alpha * y * self.diff
         # dissimilar pair
         mdist = xp.vstack((self.mdist, self.mdist)).T
         mdist_p = xp.array(self.mdist > 0, dtype=xp.int32)
         mdist_p = xp.vstack((mdist_p, mdist_p)).T
-        gx0 += alpha * (1 - y) * mdist_p * 2 * mdist * -(self.diff / dist)
+        gx0 += alpha * (1 - y) * mdist_p * mdist * -(self.diff / dist)
         gx0 = gx0.astype(xp.float32)
 
         return gx0, -gx0, None
